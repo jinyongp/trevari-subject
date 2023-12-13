@@ -7,6 +7,7 @@
   "extends": [
     "prettier",
     "eslint:recommended",
+    "plugin:tailwindcss/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
@@ -18,9 +19,17 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "prettier", "import", "react-hooks"],
+  "plugins": [
+    "@typescript-eslint",
+    "react", 
+    "import", 
+    "react-hooks",
+    "prettier"
+  ],
   "rules": {
-    "prettier/prettier": "warn"
+    "prettier/prettier": ["warn", {
+      "printWidth": 120
+    }]
   },
   "settings": {
     "import/parsers": {
