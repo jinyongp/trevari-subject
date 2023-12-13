@@ -1,7 +1,6 @@
 {
   "cSpell.words": ["tailwindcss", "trevari"],
   "css.lint.unknownAtRules": "ignore",
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": [
     "source.fixAll.eslint",
