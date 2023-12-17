@@ -3,12 +3,13 @@
 import { useRef, useState } from "react";
 
 interface Props {
+  initialSearchText?: string;
   onSubmit?(searchText: string): void;
   onTextChange?(searchText: string): void;
 }
 
-export default function SearchForm({ onSubmit, onTextChange }: Props) {
-  const [searchText, setSearchText] = useState("");
+export default function SearchForm({ initialSearchText, onSubmit, onTextChange }: Props) {
+  const [searchText, setSearchText] = useState(initialSearchText ?? "");
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
