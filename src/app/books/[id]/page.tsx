@@ -21,7 +21,14 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       <section>
         <div className="relative aspect-[3/4] w-96">
-          <Image src={book.image} alt={book.title} fill className="rounded bg-gray-100 object-cover" />
+          <Image
+            src={book.image}
+            alt={book.title}
+            fill
+            priority
+            sizes="99.9vw" // https://github.com/vercel/next.js/issues/58586
+            className="rounded bg-gray-100 object-cover"
+          />
         </div>
       </section>
       <section className="flex flex-col gap-4 [&_label>p]:text-slate-800 [&_label>span]:text-sm [&_label>span]:font-bold [&_label>span]:text-slate-600">
