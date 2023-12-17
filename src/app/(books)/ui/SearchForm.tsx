@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface Props {
   onSubmit?(searchText: string): void;
@@ -9,10 +9,12 @@ interface Props {
 
 export default function SearchForm({ onSubmit, onTextChange }: Props) {
   const [searchText, setSearchText] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSubmit?.(searchText);
+    inputRef.current?.blur();
   }
 
   function handleTextChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -25,6 +27,7 @@ export default function SearchForm({ onSubmit, onTextChange }: Props) {
       <label className="flex w-full flex-col gap-5">
         <input
           type="text"
+          ref={inputRef}
           id="pw-search"
           value={searchText}
           onChange={handleTextChange}
