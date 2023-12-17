@@ -31,6 +31,12 @@ test("검색 결과를 클릭했을 때 상세 화면으로 이동하는지 확�
   expect(await page.waitForSelector("#pw-book-detail")).toBeTruthy();
 });
 
+test("쿼리가 있을 때 이를 통해 검색 결과를 불러오는지 확인합니다.", async ({ page }) => {
+  await page.goto("/?q=mongodb");
+  await page.waitForResponse("https://api.itbook.store/1.0/search/mongodb/");
+  expect(await page.waitForSelector("#pw-search-result")).toBeTruthy();
+});
+
 test.skip("빈 문자열로 검색했을 때 이를 무시하는지 확인합니다.", async ({ page }) => {
   await page.goto("/");
   await page.fill("#pw-search", "");

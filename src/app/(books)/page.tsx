@@ -22,7 +22,7 @@ export default function Page() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const query = queryParam.get("query");
+    const query = queryParam.get("q");
     if (query) {
       if (books.length > 0) {
         reload(query);
@@ -39,7 +39,7 @@ export default function Page() {
       return;
     }
 
-    router.replace(`${pathname}?${queryParam.set("query", text)}`);
+    router.replace(`${pathname}?${queryParam.set("q", text)}`);
 
     await load(text);
   }
