@@ -1,5 +1,9 @@
 {
-  "cSpell.words": ["tailwindcss", "trevari"],
+  "cSpell.words": [
+    "classname",
+    "tailwindcss",
+    "trevari"
+  ],
   "css.lint.unknownAtRules": "ignore",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": [

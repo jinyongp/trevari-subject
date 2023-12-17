@@ -29,6 +29,9 @@
   "rules": {
     "prettier/prettier": ["warn", {
       "printWidth": 120
+    }],
+    "tailwindcss/no-custom-classname": ["warn", {
+      "whitelist": ["pw\\-.*"]
     }]
   },
   "settings": {
