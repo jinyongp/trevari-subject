@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const link = `https://itbook.store/books/${book.isbn13}`;
 
   return (
-    <div className="relative flex gap-10 p-4 sm:pb-4">
+    <div className="relative flex gap-10 p-4 sm:pb-4" id="pw-book-detail">
       <div className="absolute -top-4 left-4">
         <GoBackButton>
           <span className="text-slate-800 underline">뒤로</span>

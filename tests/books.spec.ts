@@ -22,6 +22,15 @@ test("입력한 키워드에 대응하는 결과가 없을 때 이를 표시하�
   expect(await page.waitForSelector("#pw-search-result-empty")).toBeTruthy();
 });
 
+test("검색 결과를 클릭했을 때 상세 화면으로 이동하는지 확인합니다.", async ({ page }) => {
+  await page.goto("/");
+  await page.fill("#pw-search", "mongodb");
+  await page.click("#pw-search-submit-button");
+  await page.waitForSelector("#pw-search-result");
+  await page.click("#pw-search-result .pw-card:first-child");
+  expect(await page.waitForSelector("#pw-book-detail")).toBeTruthy();
+});
+
 test.skip("빈 문자열로 검색했을 때 이를 무시하는지 확인합니다.", async ({ page }) => {
   await page.goto("/");
   await page.fill("#pw-search", "");

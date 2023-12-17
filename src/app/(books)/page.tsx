@@ -69,7 +69,7 @@ export default function Page() {
             <section className="grid gap-10" id="pw-search-result">
               <ul className="grid gap-10">
                 {books.map((book) => (
-                  <Link key={`book-${book.isbn13}`} href={`/books/${book.isbn13}`}>
+                  <Link key={`book-${book.isbn13}`} href={`/books/${book.isbn13}`} className="pw-card">
                     <BookCard book={book} />
                   </Link>
                 ))}
