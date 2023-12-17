@@ -16,6 +16,7 @@ export type BookListItem = {
 export interface BookDetailResponse {
   title: string;
   subtitle: string;
+  isbn13: string;
   authors: string;
   publisher: string;
   pages: string;
