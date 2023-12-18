@@ -1,37 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getBooks } from "@/api/fetch";
+import { useEffect, useRef } from "react";
 import SearchForm from "./ui/SearchForm";
 import BookCard from "./ui/BookCard";
-import { BookListItem } from "@/api/model";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryParams } from "@/lib/hooks/use-query-params";
 import { useSearchContext } from "@/lib/providers/search-provider";
+import { useIntersectionObserver } from "@/lib/hooks/use-intersection-observer";
 
 export default function Page() {
-  // TODO: 브라우저 뒤로가기 버튼으로 이동 시 스크롤 위치 복원 기능 문제 수정 필요
-  // useScrollContext("books");
-
   const router = useRouter();
   const pathname = usePathname();
   const queryParam = useQueryParams();
-  const searchContext = useSearchContext();
+  const { books, loading, loaded, error, load, loadMore } = useSearchContext();
 
-  const [books, setBooks] = useState<BookListItem[]>(searchContext.books);
-  const [loading, setLoading] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState(false);
+  const loadMoreHandlerRef = useRef<HTMLDivElement>(null);
+  useIntersectionObserver(
+    loadMoreHandlerRef,
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        loadMore();
+      }
+    },
+    { rootMargin: "300px" },
+  );
 
   useEffect(() => {
     const query = queryParam.get("q");
-    if (query) {
-      if (books.length > 0) {
-        reload(query);
-      } else {
-        load(query);
-      }
+    if (query && !books.length) {
+      load(query);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -47,46 +45,10 @@ export default function Page() {
     await load(text);
   }
 
-  async function load(text: string) {
-    setLoaded(false);
-    setLoading(true);
-
-    const res = await getBooks(text);
-    setError(!res);
-    setLoading(false);
-    setLoaded(true);
-
-    if (res) {
-      setBooks(res.books);
-      searchContext.books = res.books;
-    }
-  }
-
-  async function reload(text: string) {
-    setLoaded(true);
-    setLoading(false);
-
-    const res = await getBooks(text);
-    setError(!res);
-
-    if (res) {
-      setBooks(res.books);
-      searchContext.books = res.books;
-    }
-  }
-
-  function handleTextChange(searchText: string) {
-    searchContext.keyword = searchText;
-  }
-
   return (
     <div className="p-4 sm:pb-4">
       <section className="sticky top-2 z-10 mx-auto grid place-items-center md:max-w-3/4">
-        <SearchForm
-          initialSearchText={queryParam.get("q") ?? ""}
-          onSubmit={handleSubmit}
-          onTextChange={handleTextChange}
-        />
+        <SearchForm initialSearchText={queryParam.get("q") ?? ""} onSubmit={handleSubmit} />
       </section>
       {(() => {
         if (loading) {
@@ -131,6 +93,7 @@ export default function Page() {
                 ))}
               </ul>
             </section>
+            <div ref={loadMoreHandlerRef} />
           </div>
         );
       })()}
