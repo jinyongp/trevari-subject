@@ -3,7 +3,7 @@ import type { BookDetailResponse, BookListResponse } from "./model";
 const API_URL = "https://api.itbook.store/1.0";
 
 export async function getBooks(keyword: string, page?: number): Promise<BookListResponse | null> {
-  if (!keyword) throw new Error("검색 키워드를 입력해야 합니다.");
+  if (!keyword) return null;
   try {
     const res = await fetch(`${API_URL}/search/${keyword}/${page ?? ""}`);
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);

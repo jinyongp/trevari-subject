@@ -17,7 +17,8 @@ export default function BookCard({ book }: Props) {
             src={book.image}
             alt={`${book.title} - ${book.subtitle}`}
             fill
-            sizes="100vw" // https://github.com/vercel/next.js/issues/58586
+            priority
+            sizes="99.9vw" // https://github.com/vercel/next.js/issues/58586
             className="object-cover transition-transform group-hover:scale-105"
           />
         </div>
