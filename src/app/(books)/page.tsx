@@ -11,12 +11,15 @@ import { useQueryParams } from "@/lib/hooks/use-query-params";
 import { useSearchContext } from "@/lib/providers/search-provider";
 
 export default function Page() {
+  // TODO: 브라우저 뒤로가기 버튼으로 이동 시 스크롤 위치 복원 기능 문제 수정 필요
+  // useScrollContext("books");
+
   const router = useRouter();
   const pathname = usePathname();
   const queryParam = useQueryParams();
-  const context = useSearchContext();
+  const searchContext = useSearchContext();
 
-  const [books, setBooks] = useState<BookListItem[]>(context.books);
+  const [books, setBooks] = useState<BookListItem[]>(searchContext.books);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -55,9 +58,8 @@ export default function Page() {
 
     if (res) {
       setBooks(res.books);
-      context.books = res.books;
+      searchContext.books = res.books;
     }
-    window.scrollTo({ top: 0 });
   }
 
   async function reload(text: string) {
@@ -69,12 +71,12 @@ export default function Page() {
 
     if (res) {
       setBooks(res.books);
-      context.books = res.books;
+      searchContext.books = res.books;
     }
   }
 
   function handleTextChange(searchText: string) {
-    context.keyword = searchText;
+    searchContext.keyword = searchText;
   }
 
   return (
@@ -123,7 +125,7 @@ export default function Page() {
             <section className="grid gap-10" id="pw-search-result">
               <ul className="grid gap-10">
                 {books.map((book) => (
-                  <Link key={`book-${book.isbn13}`} href={`/books/${book.isbn13}`} className="pw-card">
+                  <Link key={`book-${book.isbn13}`} href={`/books/${book.isbn13}`} className="pw-card" scroll={false}>
                     <BookCard book={book} />
                   </Link>
                 ))}

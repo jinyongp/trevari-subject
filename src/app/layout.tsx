@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SearchProvider from "@/lib/providers/search-provider";
+import Provider from "@/lib/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +14,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SearchProvider>{children}</SearchProvider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
