@@ -13,14 +13,14 @@ export default async function Page({ params }: { params: { id: string } }) {
   const link = `https://itbook.store/books/${book.isbn13}`;
 
   return (
-    <div className="relative flex gap-10 p-4 sm:pb-4" id="pw-book-detail">
+    <div className="relative flex flex-col gap-10 p-4 sm:pb-4 md:flex-row" id="pw-book-detail">
       <div className="absolute -top-4 left-4">
         <GoBackButton>
           <span className="text-slate-800 underline">뒤로</span>
         </GoBackButton>
       </div>
       <section>
-        <div className="relative aspect-[3/4] w-96">
+        <div className="relative aspect-[3/4] w-full md:w-96">
           <Image
             src={book.image}
             alt={book.title}
