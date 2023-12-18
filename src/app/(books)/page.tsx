@@ -83,7 +83,7 @@ export default function Page() {
     <div className="p-4 sm:pb-4">
       <section className="sticky top-2 z-10 mx-auto grid place-items-center md:max-w-3/4">
         <SearchForm
-          initialSearchText={queryParam.get("query") ?? ""}
+          initialSearchText={queryParam.get("q") ?? ""}
           onSubmit={handleSubmit}
           onTextChange={handleTextChange}
         />
@@ -120,7 +120,7 @@ export default function Page() {
         return (
           <div className="mx-auto mt-10 space-y-10 md:max-w-3/4">
             <section className="grid gap-10">
-              <h2 className="text-lg font-bold text-slate-400">검색 결과 ({books.length}건)</h2>
+              <h2 className="text-lg font-bold text-slate-400">검색 결과</h2>
             </section>
             <section className="grid gap-10" id="pw-search-result">
               <ul className="grid gap-10">

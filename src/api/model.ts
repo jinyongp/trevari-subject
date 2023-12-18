@@ -1,5 +1,4 @@
 export interface BookListResponse {
-  total: string;
   page: string;
   books: BookListItem[];
 }
