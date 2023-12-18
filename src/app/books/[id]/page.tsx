@@ -65,11 +65,13 @@ export default async function Page({ params }: { params: { id: string } }) {
           <p>{book.price}</p>
         </label>
         <label>
-          <span className="!text-xs underline">
-            <a href={link} target="_blank" rel="noreferrer noopener">
-              상세보기
-            </a>
-          </span>
+          <span>상세정보</span>
+          <p>
+            {book.desc}
+            <span className="ml-2 !text-xs underline">
+              <a href={link}>더보기</a>
+            </span>
+          </p>
         </label>
       </section>
     </div>
